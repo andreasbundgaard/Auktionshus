@@ -7,7 +7,7 @@ namespace Auktionshuset
 {
     internal class Program
     {
-        public static Auction _auction = new Auction();
+        public static Auctions _auction = new Auctions();
 
         static void Main(string[] args)
         {

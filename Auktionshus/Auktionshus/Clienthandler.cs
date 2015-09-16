@@ -6,12 +6,12 @@ namespace Auktionshuset
 {
     internal class Clienthandler
     {
-        private readonly Auction _auction;
+        private readonly Auctions _auction;
         private readonly Socket _client;
         private string _clientName;
         private bool done;
 
-        public Clienthandler(Socket client, Auction auction)
+        public Clienthandler(Socket client, Auctions auction)
         {
             _auction = auction;
             _client = client;

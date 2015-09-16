@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace Auktionshuset
 {
-    internal class Auction
+    internal class Auctions
     {
         public delegate void broadcastDelegate(string message);
 
@@ -16,7 +16,7 @@ namespace Auktionshuset
         private AuctionItem _currentAuction;
         private int _auctionarious;
 
-        public Auction()
+        public Auctions()
         {
             auctionItems.Add(new AuctionItem
             {
