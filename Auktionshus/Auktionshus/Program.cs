@@ -16,8 +16,6 @@ namespace Auktionshuset
 
         private class SocketServer
         {
-            private bool done = true;
-
             public SocketServer(int port)
             {
                 IPAddress ip = IPAddress.Parse("127.0.0.1");
