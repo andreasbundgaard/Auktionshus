@@ -21,29 +21,29 @@ namespace Auktionshuset
             auctionItems.Add(new AuctionItem
             {
                 winner = "Ingen",
-                startPrice = 100,
-                endPrice = 100,
+                startPrice = 50,
+                endPrice = 200,
                 item = "En spejderdolk"
             });
             auctionItems.Add(new AuctionItem
             {
                 winner = "Ingen",
-                startPrice = 100,
-                endPrice = 100,
+                startPrice = 1000,
+                endPrice = 2500,
                 item = "En iPhone 6 Plus"
             });
             auctionItems.Add(new AuctionItem
             {
                 winner = "Ingen",
-                startPrice = 100,
-                endPrice = 100,
+                startPrice = 30,
+                endPrice = 55,
                 item = "20 kg. æbler"
             });
             auctionItems.Add(new AuctionItem
             {
                 winner = "Ingen",
                 startPrice = 100,
-                endPrice = 100,
+                endPrice = 300,
                 item = "En ekslusiv pool-kø"
             });
         }
@@ -97,7 +97,7 @@ namespace Auktionshuset
             }
 
             if (broadcastEvent != null)
-                broadcastEvent("Dette var dagens auktioner - Tak fordi du brugte Auktionshuset - på gensyn!");
+                broadcastEvent("Tak fordi du brugte Auktionarous!");
         }
 
         private void ResetAuctionarious()
@@ -121,7 +121,7 @@ namespace Auktionshuset
                 }
                 else
                 {
-                    return "Bud for lavt";
+                    return "Budet er for lavt";
                 }
             }
 

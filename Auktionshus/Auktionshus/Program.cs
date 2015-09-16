@@ -24,17 +24,17 @@ namespace Auktionshuset
 
                 Console.WriteLine("Server er klar på port " + port);
 
-                var auctionThread = new Thread(_auction.RunAuction);        //Starter en ny tråd til auktionshuset
+                var auctionThread = new Thread(_auction.RunAuction);        // Starter en ny tråd til auktionshuset
                 auctionThread.Start();
 
                 while (true)
                 {
                     Socket clientSocket = server.AcceptSocket();
-                    Console.WriteLine("Der er nu forbundet en byder...");
+                    Console.WriteLine("En byder blev forbundet...");
 
                     var handler = new Clienthandler(clientSocket, _auction);
 
-                    var clientThread = new Thread(handler.RunClient);       //Starter en ny tråd til klienten
+                    var clientThread = new Thread(handler.RunClient);       // Starter en ny tråd til klienten
                     clientThread.Start();
                 }
             }
