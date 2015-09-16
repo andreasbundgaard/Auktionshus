@@ -56,7 +56,7 @@ namespace Auktionshuset
             {
                 _currentAuction = auctionItem;
                 _auctionRunning = true;
-                ResetGravel();
+                ResetAuctionarious();
 
                 if (broadcastEvent != null)
                     broadcastEvent("Starter auktion for: " + _currentAuction.item + " Start pris: " +
@@ -100,7 +100,7 @@ namespace Auktionshuset
                 broadcastEvent("Dette var dagens auktioner - Tak fordi du brugte Auktionshuset - på gensyn!");
         }
 
-        private void ResetGravel()
+        private void ResetAuctionarious()
         {
             lock (auctionariousLock)
             {
@@ -117,7 +117,7 @@ namespace Auktionshuset
                     broadcastEvent(name + " bud " + amount);
                     _currentAuction.endPrice = amount;
                     _currentAuction.winner = name;
-                    ResetGravel();
+                    ResetAuctionarious();
                 }
                 else
                 {
