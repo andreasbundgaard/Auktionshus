@@ -61,6 +61,7 @@ namespace Auktionshuset
                 if (broadcastEvent != null)
                     broadcastEvent("Starter auktion for: " + _currentAuction.item + " Start pris: " +
                                    _currentAuction.startPrice);
+                Console.WriteLine("Starter auktion for: " + _currentAuction.item + " Start pris: " + _currentAuction.startPrice);
 
                 while (_auctionRunning)
                 {
@@ -94,6 +95,7 @@ namespace Auktionshuset
                 if (broadcastEvent != null)
                     broadcastEvent(_currentAuction.winner + " havde det højeste bud på\r\n" + _currentAuction.item + " : " +
                                    _currentAuction.endPrice + " kr.");
+                Console.WriteLine(_currentAuction.winner + " havde det højeste bud på\r\n" + _currentAuction.item + " : " + _currentAuction.endPrice + " kr.");
             }
 
             if (broadcastEvent != null)
