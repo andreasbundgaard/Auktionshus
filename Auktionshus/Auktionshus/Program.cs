@@ -32,7 +32,7 @@ namespace Auktionshuset
                     Socket clientSocket = server.AcceptSocket();
                     Console.WriteLine("En byder blev forbundet...");
 
-                    var handler = new Clienthandler(clientSocket, _auction);
+                    var handler = new Clienthandler(clientSocket, _auction);    //Initialisere et objekt af typen Clienthandler
 
                     var clientThread = new Thread(handler.RunClient);       // Starter en ny tråd til klienten
                     clientThread.Start();
