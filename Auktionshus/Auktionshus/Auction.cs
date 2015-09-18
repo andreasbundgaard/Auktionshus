@@ -6,9 +6,9 @@ namespace Auktionshuset
 {
     internal class Auctions
     {
-        public delegate void broadcastDelegate(string message);
+        public delegate void broadcastDelegate(string message);         //Laver en ny delegat til broadcast
 
-        private readonly List<AuctionItem> auctionItems = new List<AuctionItem>();
+        private readonly List<AuctionItem> auctionItems = new List<AuctionItem>();      //Laver en liste med varer der skal på auktion
 
         private readonly object auctionariousLock = new object();
         private readonly object itemLock = new object();
@@ -16,7 +16,7 @@ namespace Auktionshuset
         private AuctionItem _currentAuction;
         private int _auctionarious;
 
-        public Auctions()
+        public Auctions()       //Tilføjer varer til der skal på auktion til listen
         {
             auctionItems.Add(new AuctionItem
             {
@@ -50,7 +50,7 @@ namespace Auktionshuset
 
         public event broadcastDelegate broadcastEvent;
 
-        public void RunAuction()
+        public void RunAuction()        //Tager varerne fra listen, og starter en ny auktion på den pågældende vare
         {
             foreach (AuctionItem auctionItem in auctionItems)
             {
@@ -63,11 +63,11 @@ namespace Auktionshuset
                                    _currentAuction.startPrice);
                 Console.WriteLine("Starter auktion for: " + _currentAuction.item + " Start pris: " + _currentAuction.startPrice);
 
-                while (_auctionRunning)
+                while (_auctionRunning)         //Hammerslag, der efter 10 sekunder(første gang), 5 sekunder (anden gang) og 0 sekunder(solgt)
                 {
                     Thread.Sleep(1000);
 
-                    lock (auctionariousLock)
+                    lock (auctionariousLock)        //Låser auktionarius
                     {
                         _auctionarious--;
 
@@ -92,17 +92,17 @@ namespace Auktionshuset
                         }
                     }
                 }
-                if (broadcastEvent != null)
+                if (broadcastEvent != null)         //Kigger på hvem der har det højeste bud på den pågældende auktion, og hvor stort buddet er
                     broadcastEvent(_currentAuction.winner + " havde det højeste bud på\r\n" + _currentAuction.item + " : " +
                                    _currentAuction.endPrice + " kr.");
                 Console.WriteLine(_currentAuction.winner + " havde det højeste bud på\r\n" + _currentAuction.item + " : " + _currentAuction.endPrice + " kr.");
             }
 
-            if (broadcastEvent != null)
+            if (broadcastEvent != null)         //Broadcaster at auktionen nu er slut
                 broadcastEvent("Tak fordi du brugte Auktionarous!");
         }
 
-        private void ResetAuctionarious()
+        private void ResetAuctionarious()       //Nulstiller auktionarius 
         {
             lock (auctionariousLock)
             {
@@ -110,9 +110,9 @@ namespace Auktionshuset
             }
         }
 
-        public string Bid(string name, int amount)
+        public string Bid(string name, int amount)         //Kigger på hvem der har budt, og hvor meget buddet lyder på.
         {
-            lock (itemLock)
+            lock (itemLock)         //Låser den pågældende auktion for at tage imod bud
             {
                 if (_currentAuction.endPrice < amount)
                 {
@@ -127,11 +127,11 @@ namespace Auktionshuset
                 }
             }
 
-            return "Du byder nu : " + amount;
+            return "Du byder nu : " + amount;       //Returnerer information om det pågældende bud til klienten
         }
     }
 
-    internal class AuctionItem
+    internal class AuctionItem          //En intern klasse, med forskellige properties
     {
         public int startPrice { get; set; }
         public int endPrice { get; set; }

@@ -16,10 +16,10 @@ namespace Auktionshuset
             _auction = auction;
             _client = client;
 
-            _auction.broadcastEvent += _auction_broadcastEvent;     //Forbinder sig til klienten
+            _auction.broadcastEvent += _auction_broadcastEvent;     //Forbinder sig til broadcasten
         }
 
-        private void _auction_broadcastEvent(string message)
+        private void _auction_broadcastEvent(string message)        //Opsætter en stream til at sende og modtage in- og output til broadcasten
         {
             var stream = new NetworkStream(_client);
             var writer = new StreamWriter(stream);
@@ -27,14 +27,14 @@ namespace Auktionshuset
             writer.WriteLine(message);
         }
 
-        public void RunClient()
+        public void RunClient()         //Opsætter en stream til at sende og modtage in- og output mellem server og klient
         {
             var stream = new NetworkStream(_client);
             var reader = new StreamReader(stream);
             var writer = new StreamWriter(stream);
             writer.AutoFlush = true;
 
-            writer.WriteLine("Skriv dit navn:");
+            writer.WriteLine("Skriv dit navn:");        //Beder byderen om at indtaste sit navn
 
             _clientName = reader.ReadLine();
 
@@ -43,19 +43,19 @@ namespace Auktionshuset
             done = false;
             while (!done)
             {
-                try
+                try             //Hvis der er en byder der er forbundet, broadcaster den følgende
                 {
                     string[] commands = reader.ReadLine().Split(' ');
 
-                    switch (commands[0])
+                    switch (commands[0])        //Broadcaster hvilke kommandoer byderen kan gøre brug af
                     {
-                        case "farvel":
+                        case "farvel":              //Forbindelsen til klienten ophører
                             _auction.broadcastEvent -= _auction_broadcastEvent;
                             writer.WriteLine("Tak for denne gang, på gensyn!...");
                             done = true;
                             break;
-                        case "byd":
-                            string bidString = _auction.Bid(_clientName, int.Parse(commands[1]));
+                        case "byd":                 //Modtager bud fra klienten
+                            string bidString = _auction.Bid(_clientName, int.Parse(commands[1]));   
 
                             writer.WriteLine(bidString);
                             break;
@@ -71,6 +71,7 @@ namespace Auktionshuset
                 }
             }
 
+            //Der bliver lukket for stream og socket
             writer.Close();
             reader.Close();
             stream.Close();
