@@ -6,12 +6,12 @@ namespace Auktionshuset
 {
     internal class Clienthandler
     {
-        private readonly Auctions _auction;
+        private readonly Auction _auction;
         private readonly Socket _client;
         private string _clientName;
         private bool done;
 
-        public Clienthandler(Socket client, Auctions auction)
+        public Clienthandler(Socket client, Auction auction)
         {
             _auction = auction;
             _client = client;
@@ -33,13 +33,14 @@ namespace Auktionshuset
             var reader = new StreamReader(stream);
             var writer = new StreamWriter(stream);
             writer.AutoFlush = true;
-
+			
             writer.WriteLine("Skriv dit navn:");        //Beder byderen om at indtaste sit navn
 
             _clientName = reader.ReadLine();
 
             writer.WriteLine("Velkommen til! {0}\r\nSkriv 'farvel' for at lukke auktionshuset.\r\n'byd' og dit bud, for at byde.", _clientName);
 
+						writer.WriteLine(_auction.GetCurrentAuctionItemInfo());
             done = false;
             while (!done)
             {
@@ -71,8 +72,9 @@ namespace Auktionshuset
                 }
             }
 
-            //Der bliver lukket for stream og socket
-            writer.Close();
+			//Der bliver lukket for stream og socket
+						_auction.broadcastEvent -= _auction_broadcastEvent;
+						writer.Close();
             reader.Close();
             stream.Close();
             _client.Close();

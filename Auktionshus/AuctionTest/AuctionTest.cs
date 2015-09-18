@@ -1,14 +1,19 @@
 ﻿using System;
+using Auktionshuset;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace AuctionTest
 {
     [TestClass]
-    public class UnitTest1
+    public class AuctionTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void BidTest()
         {
+						Auction auction = new Auction();
+						auction.Bid("Sebastian", 1000);
+
+						
         }
     }
 }

@@ -7,19 +7,18 @@ namespace Auktionshuset
 {
     internal class Program
     {
-        public static Auctions _auction = new Auctions();
+        public static Auction _auction = new Auction();
 
         static void Main(string[] args)
         {
-            new SocketServer(11100);
+            new SocketServer(20001);
         }
 
         private class SocketServer
         {
             public SocketServer(int port)
             {
-                IPAddress ip = IPAddress.Parse("127.0.0.1");
-                var server = new TcpListener(ip, port);
+                var server = new TcpListener(IPAddress.Any, port);
                 server.Start();
 
                 Console.WriteLine("Server er klar på port " + port);
