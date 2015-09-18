@@ -1,5 +1,9 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
+using System.Text;
+using System.Threading;
+using Auktionshuset;
+using System.Collections.Generic;
 
 namespace AuctionTest
 {
@@ -9,6 +13,7 @@ namespace AuctionTest
         [TestMethod]
         public void TestMethod1()
         {
+
         }
     }
 }
