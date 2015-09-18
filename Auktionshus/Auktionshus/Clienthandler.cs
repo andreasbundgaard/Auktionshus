@@ -38,7 +38,7 @@ namespace Auktionshuset
 
             _clientName = reader.ReadLine();
 
-            writer.WriteLine("Velkommen til! {0}\r\nSkriv 'farvel' for at lukke auktionshuset.\r\n'byd' og dit bud, for at byde.", _clientName);
+            writer.WriteLine("Velkommen {0}\r\nSkriv 'farvel' for at lukke auktionshuset.\r\n'byd' og dit bud, for at byde.", _clientName);
 
             done = false;
             while (!done)
